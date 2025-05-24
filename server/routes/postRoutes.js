@@ -4,7 +4,7 @@ import { authenticate } from '../middleware/auth.js'
 
 const router = Router()
 
-router.get('/posts', getAll)
+router.get('/posts', authenticate, getAll)
 router.post('/posts', authenticate, addPost)
 
 export default router

@@ -2,7 +2,6 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
-import { authenticate } from './middleware/auth.js'
 import postRoutes from './routes/postRoutes.js'
 import authRoutes from './routes/userRoutes.js'
 
@@ -11,14 +10,14 @@ const app = express()
 
 app.use(
 	cors({
-		origin: 'http://localhost:5173',
+		origin: 'https://test-app-nine-navy.vercel.app',
 		exposedHeaders: ['access-token', 'refresh-token']
 	})
 )
 app.use(express.json())
 
 app.use('/api/auth', authRoutes)
-app.use('/api', authenticate, postRoutes)
+app.use('/api', postRoutes)
 
 mongoose
 	.connect(process.env.MONGO_URI)
